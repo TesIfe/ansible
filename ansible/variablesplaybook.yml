@@ -1,0 +1,20 @@
+---
+- name: illustrating variables
+  hosts: fedora
+  become: yes
+  become_method: sudo
+
+  vars:
+    user: bob
+    group: sys
+    package: cowsay
+
+  tasks:
+  - name: Add the user 'bob'
+    user:
+      name: "{{user }}"
+      group: "{{ group }}"
+  - name: Ensure that the cowsay command is installed
+    dnf:
+      update_cache: yes
+      name: "{{ package }}" 

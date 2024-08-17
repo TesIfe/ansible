@@ -1,0 +1,12 @@
+---
+- hosts: ubuntu
+  become: yes
+  become_method: sudo
+
+  vars:
+  vars/linuxsecrets.yml
+
+  tasks:
+    - user:
+      name: 'tina'
+      group: sys

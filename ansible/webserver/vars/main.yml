@@ -1,0 +1,4 @@
+---
+ansible_sudo_pass: "Secret555"
+
+windows_tina_pass: "Secret555"

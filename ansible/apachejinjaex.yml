@@ -1,0 +1,35 @@
+---
+- hosts: linux
+  become: yes
+  become_method: sudo
+
+  vars_files:
+  - vars/linuxsecrets.yml
+
+  tasks:
+  - name: Ensure the apache deamon is installed on RedHat distro
+    dnf:
+      name: httpd
+      state: present
+    when: ansible_os_family == 'RedHat'
+
+  - name: Ensure that the apache daemon is running on RedHat distro
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_os_family == 'RedHat'
+
+  - name: Ensure the apache deamon is installed on Debian distro
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == 'Debian'
+
+  - name: Ensure that the apache daemon is running on Debian distro
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+    when: ansible_os_family == 'Debian'
+
